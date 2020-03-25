@@ -21,43 +21,48 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
 
 
-  int _counter = 0;
+  int counter = 0;
+
+  bool isChecked  = false;
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           title: Text('Paras'),
         ),
-        body: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RaisedButton(onPressed: () {
-                    setState(() {
-                      _counter--;
-                    });
-                  },
-                    child: Text('Change'),
-                  ),
-                  Text(
-                    'You have pushed the button this many times:',
-                  ),
-                  Text(
-                    '$_counter',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .display1,
-                  ),
-                  RaisedButton(onPressed: () {
-                    setState(() {
-                      _counter++;
-                    });
-                  }, child: Icon(Icons.add),),
-                ],
-              );
-            }));
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+          StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) =>Checkbox(
+            value: isChecked,
+            onChanged: (value) {
+              setState(() {
+                isChecked = value;
+              });
+            },
+          ),
+          ),
+              StatefulBuilder(
+                builder: (BuildContext context, StateSetter setState) => Column(
+                  children: <Widget>[
+                    RaisedButton(onPressed: ()
+                    {
+                      setState(() {
+                        counter++;
+                      });
+                    }),
+                    Text(counter.toString()),
+                  ],
+                ),
+              ),
+
+            ],
+          ),
+        ));
   }
 
 
